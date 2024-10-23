@@ -19,10 +19,13 @@ public class Espacio {
     @Column(name = "id_espacio")
     private Long id;
 
+    @Basic(optional = false)
     private String dimensiones;
 
+    @Basic(optional = false)
     private int precio;
 
+    @Basic(optional = false)
     private String estado;
 
     @ManyToOne

@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.JdbcType;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -22,11 +21,14 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_cliente;
 
+    @Basic(optional = false)
     @Column(name = "nombre")
     private String nombre_cliente;
 
+    @Basic(optional = false)
     private int telefono;
 
+    @Basic(optional = false)
     private String correo;
 
     @JdbcTypeCode(SqlTypes.JSON)
