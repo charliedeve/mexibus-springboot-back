@@ -34,4 +34,5 @@ public class Cliente {
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "domicilio", columnDefinition = "json")
     private JsonNode domicilio;
+
 }
