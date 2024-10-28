@@ -21,6 +21,10 @@ public class EspacioServiceImpl implements EspacioService {
         return espacioRepository.findAll();
     }
 
+    public Espacio obtenerEspacioById(Long id){
+        return espacioRepository.findById(id).orElse(null);
+    }
+
     @Override
     public Espacio crearEspacio(Espacio espacio) {
         return espacioRepository.save(espacio);

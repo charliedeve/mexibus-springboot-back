@@ -8,6 +8,8 @@ public interface EspacioService {
 
     List<Espacio> buscarEspacios();
 
+    Espacio obtenerEspacioById(Long id);
+
     Espacio crearEspacio(Espacio espacio);
 
     Espacio actualizarEspacio(Long id, Espacio espacio);

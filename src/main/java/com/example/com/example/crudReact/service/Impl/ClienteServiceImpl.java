@@ -20,6 +20,11 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
+    public Cliente obtenerClienteById(Long id){
+        return clienteRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public Cliente crearCliente(Cliente cliente) {
         return clienteRepository.save(cliente);
     }

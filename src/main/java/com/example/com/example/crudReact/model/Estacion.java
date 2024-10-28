@@ -1,5 +1,6 @@
 package com.example.com.example.crudReact.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,7 +25,8 @@ public class Estacion {
 
     @ManyToOne
     @JoinColumn(name = "linea_padre", nullable = false)
-    private Linea linea;
+    @JsonIgnore
+    private Linea lineaPadre;
 
     @OneToMany(mappedBy = "estacion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Espacio> espacios;

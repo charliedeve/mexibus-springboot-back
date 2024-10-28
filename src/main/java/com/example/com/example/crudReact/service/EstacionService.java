@@ -8,6 +8,8 @@ public interface EstacionService {
 
     List<Estacion> buscarEstaciones();
 
+    Estacion obtenerEstacionById(Long id);
+
     Estacion crearEstacion(Estacion estacion);
 
     void eliminarEstacion(Long id);

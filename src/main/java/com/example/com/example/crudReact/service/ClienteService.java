@@ -8,6 +8,8 @@ public interface ClienteService {
 
     List<Cliente> obtenerClientes();
 
+    Cliente obtenerClienteById(Long id);
+
     Cliente crearCliente(Cliente cliente);
 
     Cliente actualizarCliente(Long id, Cliente cliente);

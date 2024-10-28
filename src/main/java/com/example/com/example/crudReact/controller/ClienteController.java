@@ -3,7 +3,7 @@ package com.example.com.example.crudReact.controller;
 import com.example.com.example.crudReact.model.Cliente;
 import com.example.com.example.crudReact.service.Impl.ClienteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +18,16 @@ public class ClienteController {
     @GetMapping("/obtenerCliente")
     public List<Cliente> obtenerClientes(){
         return clienteServiceImpl.obtenerClientes();
+    }
+
+    @GetMapping("/obtenerClienteById/{id}")
+    public ResponseEntity<Cliente> obtenerClienteById(@PathVariable Long id){
+        Cliente cliente = clienteServiceImpl.obtenerClienteById(id);
+        if(cliente != null){
+            return ResponseEntity.ok(cliente);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping("/agregaCliente")

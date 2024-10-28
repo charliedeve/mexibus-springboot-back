@@ -19,6 +19,10 @@ public class EstacionServiceImpl implements EstacionService {
         return estacionRepository.findAll();
     }
 
+    public Estacion obtenerEstacionById(Long id){
+        return estacionRepository.findById(id).orElse(null);
+    }
+
     @Override
     public Estacion crearEstacion(Estacion estacion) {
         return estacionRepository.save(estacion);
