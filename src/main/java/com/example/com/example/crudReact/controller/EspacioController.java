@@ -16,13 +16,14 @@ public class EspacioController {
     @Autowired
     EspacioService espacioService;
 
-    @GetMapping("/obtenerEspacio")
-    private List<Espacio> obtenerEspacio(){
-        return espacioService.buscarEspacios();
+    @GetMapping("/buscaEspacio")
+    public ResponseEntity<List<Espacio>> buscaEspacio() {
+        List<Espacio> espacios = espacioService.buscarEspacios();
+        return ResponseEntity.ok(espacios);
     }
 
     @GetMapping("/obtenerEspacioById/{id}")
-    private ResponseEntity<Espacio> obtenerEspacioById(@PathVariable Long id){
+    public ResponseEntity<Espacio> obtenerEspacioById(@PathVariable Long id){
         Espacio espacio = espacioService.obtenerEspacioById(id);
         if (espacio != null) {
             return ResponseEntity.ok(espacio);
