@@ -21,6 +21,10 @@ public class EspacioServiceImpl implements EspacioService {
         return espacioRepository.findAll();
     }
 
+    public List<Espacio> findByEstacionId(Long id){
+        return espacioRepository.findByEstacionId(id);
+    }
+
     public Espacio obtenerEspacioById(Long id){
         return espacioRepository.findById(id).orElse(null);
     }

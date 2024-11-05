@@ -6,8 +6,8 @@ import com.example.com.example.crudReact.service.EspacioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/espacio")
@@ -20,6 +20,12 @@ public class EspacioController {
     public ResponseEntity<List<Espacio>> buscaEspacio() {
         List<Espacio> espacios = espacioService.buscarEspacios();
         return ResponseEntity.ok(espacios);
+    }
+
+    @GetMapping("/obtenerEspacioEstacion/{id}")
+    public ResponseEntity<List<Espacio>> obtenerEspacioEstacion(@PathVariable Long id){
+        List<Espacio> lstEspacios = espacioService.findByEstacionId(id);
+        return ResponseEntity.ok(lstEspacios);
     }
 
     @GetMapping("/obtenerEspacioById/{id}")
