@@ -19,11 +19,11 @@ public class Cliente {
     @Id
     @Column(name = "id_cliente")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_cliente;
+    private Long idCliente;
 
     @Basic(optional = false)
     @Column(name = "nombre")
-    private String nombre_cliente;
+    private String nombre;
 
     @Basic(optional = false)
     private int telefono;

@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EspacioServiceImpl implements EspacioService {
+
+
 
     @Autowired
     EspacioRepository espacioRepository;
@@ -21,8 +24,10 @@ public class EspacioServiceImpl implements EspacioService {
         return espacioRepository.findAll();
     }
 
-    public List<Espacio> findByEstacionId(Long id){
-        return espacioRepository.findByEstacionId(id);
+
+    @Override
+    public List<Espacio> selectByExampleEstacion(Optional<String> pBusqueda) {
+        return List.of();
     }
 
     public Espacio obtenerEspacioById(Long id){

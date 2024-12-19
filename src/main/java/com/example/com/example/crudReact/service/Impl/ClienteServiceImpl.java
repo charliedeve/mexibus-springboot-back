@@ -32,7 +32,7 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public Cliente actualizarCliente(Long id, Cliente cliente){
             clienteRepository.findById(id).map(indice -> {
-            indice.setNombre_cliente(cliente.getNombre_cliente());
+            indice.setNombre(cliente.getNombre());
             indice.setTelefono(cliente.getTelefono());
             indice.setCorreo(cliente.getCorreo());
 

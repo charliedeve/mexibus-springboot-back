@@ -4,9 +4,12 @@ package com.example.com.example.crudReact.controller;
 import com.example.com.example.crudReact.model.Estacion;
 import com.example.com.example.crudReact.service.Impl.EstacionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/estacion")
@@ -15,9 +18,10 @@ public class EstacionController {
     @Autowired
     EstacionServiceImpl estacionServiceImpl;
 
-    @GetMapping("/obtenerEstacion")
-    public List<Estacion> buscarEstaciones(){
-        return estacionServiceImpl.buscarEstaciones();
+    @GetMapping("/buscaEstacion/{pBusqueda}")
+    public ResponseEntity<List<Estacion>> buscarEstacion(@PathVariable String pBusqueda){
+        List<Estacion> lstEstacion = estacionServiceImpl.buscarEstacion(Optional.ofNullable(StringUtils.isEmpty(pBusqueda.trim()) ? null:pBusqueda));
+        return ResponseEntity.ok(lstEstacion);
     }
 
     @GetMapping("/obtenerEstacionById/{id}")

@@ -17,7 +17,10 @@ public class Espacio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_espacio")
-    private Long id;
+    private Long idEspacio;
+
+    @Basic(optional = false)
+    private String nombre;
 
     @Basic(optional = false)
     private String dimensiones;

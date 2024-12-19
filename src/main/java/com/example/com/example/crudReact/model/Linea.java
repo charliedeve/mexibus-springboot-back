@@ -17,7 +17,7 @@ public class Linea {
 
     @Id
     @Column(name = "id_linea")
-    private Long id;
+    private Long idLinea;
 
     @OneToMany(mappedBy = "lineaPadre", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Estacion> estaciones;

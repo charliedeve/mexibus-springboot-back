@@ -22,12 +22,6 @@ public class EspacioController {
         return ResponseEntity.ok(espacios);
     }
 
-    @GetMapping("/obtenerEspacioEstacion/{id}")
-    public ResponseEntity<List<Espacio>> obtenerEspacioEstacion(@PathVariable Long id){
-        List<Espacio> lstEspacios = espacioService.findByEstacionId(id);
-        return ResponseEntity.ok(lstEspacios);
-    }
-
     @GetMapping("/obtenerEspacioById/{id}")
     public ResponseEntity<Espacio> obtenerEspacioById(@PathVariable Long id){
         Espacio espacio = espacioService.obtenerEspacioById(id);
@@ -49,7 +43,7 @@ public class EspacioController {
     }
 
     @DeleteMapping("/eliminarEspacio/{id}")
-    public void eliminarEspacio(Long id){
+    public void eliminarEspacio(@PathVariable Long id){
         espacioService.eliminarEspacio(id);
     }
 }

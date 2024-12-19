@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EstacionServiceImpl implements EstacionService {
@@ -15,8 +16,11 @@ public class EstacionServiceImpl implements EstacionService {
     @Autowired
     EstacionRepository estacionRepository;
 
-    public List<Estacion> buscarEstaciones(){
-        return estacionRepository.findAll();
+    @Override
+    public List<Estacion> buscarEstacion(Optional<String> pBusqueda) {
+        return pBusqueda.isPresent() ? estacionRepository.selectByExample
+                (String.format("%s%s%s", "%", pBusqueda.get(), "%")):
+                estacionRepository.selectByExample(null);
     }
 
     public Estacion obtenerEstacionById(Long id){
