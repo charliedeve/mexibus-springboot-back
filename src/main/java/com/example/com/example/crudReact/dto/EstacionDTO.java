@@ -1,52 +1,40 @@
 package com.example.com.example.crudReact.dto;
 
+import com.example.com.example.crudReact.model.Espacio;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.util.List;
 
 
 public class EstacionDTO {
 
+    @Setter
+    @Getter
     private Long idEstacion;
 
     @NotEmpty(message = "Nombre de estacion requerido")
     @Size(max = 100, message = "Nombre de estacion excedido (max: 100)")
+    @Getter
+    @Setter
     private String nombre;
 
-    private String lineaPadre;
+    @Setter
+    @Getter
+    private Long lineaPadre;
 
+    @Getter
+    @Setter
+    private List<Espacio> espacios;
 
     public EstacionDTO(){}
 
-    public EstacionDTO(Long idEstacion, String nombre, String lineaPadre){
+    public EstacionDTO(Long idEstacion, String nombre, Long lineaPadre, List<Espacio> espacios){
         this.idEstacion = idEstacion;
         this.nombre = nombre;
         this.lineaPadre = lineaPadre;
-    }
-
-    public Long getIdEstacion() {
-        return idEstacion;
-    }
-
-    public void setIdEstacion(Long idEstacion) {
-        this.idEstacion = idEstacion;
-    }
-
-    public @NotEmpty(message = "Nombre de estacion requerido") @Size(max = 100, message = "Nombre de estacion excedido (max: 100)") String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(@NotEmpty(message = "Nombre de estacion requerido") @Size(max = 100, message = "Nombre de estacion excedido (max: 100)") String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getLineaPadre() {
-        return lineaPadre;
-    }
-
-    public void setLineaPadre(String lineaPadre) {
-        this.lineaPadre = lineaPadre;
+        this.espacios = espacios;
     }
 
 }

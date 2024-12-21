@@ -1,6 +1,7 @@
 package com.example.com.example.crudReact.service.Impl;
 
 
+import com.example.com.example.crudReact.dto.EstacionDTO;
 import com.example.com.example.crudReact.model.Estacion;
 import com.example.com.example.crudReact.repository.EstacionRepository;
 import com.example.com.example.crudReact.service.EstacionService;
@@ -22,6 +23,14 @@ public class EstacionServiceImpl implements EstacionService {
                 (String.format("%s%s%s", "%", pBusqueda.get(), "%")):
                 estacionRepository.selectByExample(null);
     }
+
+    @Override
+    public List<Estacion> buscaEstacionByLinea(Long pLinea, Optional<String> pBusqueda) {
+        return pBusqueda.isPresent() ? estacionRepository.selectByLineaPadre
+                (pLinea, String.format("%s%s%s", "%", pBusqueda.get(), "%")):
+                estacionRepository.selectByLineaPadre(pLinea, null);
+    }
+
 
     public Estacion obtenerEstacionById(Long id){
         return estacionRepository.findById(id).orElse(null);

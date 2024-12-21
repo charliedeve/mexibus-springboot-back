@@ -1,6 +1,7 @@
 package com.example.com.example.crudReact.controller;
 
 
+import com.example.com.example.crudReact.dto.EstacionDTO;
 import com.example.com.example.crudReact.model.Estacion;
 import com.example.com.example.crudReact.service.Impl.EstacionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,13 @@ public class EstacionController {
         List<Estacion> lstEstacion = estacionServiceImpl.buscarEstacion(Optional.ofNullable(StringUtils.isEmpty(pBusqueda.trim()) ? null:pBusqueda));
         return ResponseEntity.ok(lstEstacion);
     }
+
+    @GetMapping("/buscaEstacionByLinea/{pLinea}/{pBusqueda}")
+    public ResponseEntity<List<Estacion>> buscaEstacionLinea(@PathVariable Long pLinea, @PathVariable String pBusqueda){
+        List<Estacion> lstEstacion = estacionServiceImpl.buscaEstacionByLinea(pLinea, Optional.ofNullable(StringUtils.isEmpty(pBusqueda.trim()) ? null:pBusqueda));
+        return ResponseEntity.ok(lstEstacion);
+    }
+
 
     @GetMapping("/obtenerEstacionById/{id}")
     public Estacion obtenerEstacionById(Long id){
