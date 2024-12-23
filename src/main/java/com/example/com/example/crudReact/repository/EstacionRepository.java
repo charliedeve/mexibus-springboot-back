@@ -1,8 +1,8 @@
 package com.example.com.example.crudReact.repository;
 
 
-import com.example.com.example.crudReact.dto.EstacionDTO;
 import com.example.com.example.crudReact.model.Estacion;
+import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -22,10 +22,14 @@ public interface EstacionRepository extends JpaRepository<Estacion, Long> {
             " OR LOWER(linea_padre) LIKE CONCAT('%', LOWER(:pBusqueda), '%')" +
             " )", nativeQuery = true
     )
-    List<Estacion> selectByExample(@Param("pBusqueda") String pBusqueda);
+    List<Estacion> selectByExample(@Param("pBusqueda") String pBusqueda) throws DataAccessException;
 
 
-    @Query(value = "SELECT * FROM estacion_mexi" +
+    @Query(value = "SELECT " +
+            " estacion_mexi.id_estacion, " +
+            " estacion_mexi.nom_estacion, " +
+            " estacion_mexi.linea_padre " +
+            " FROM estacion_mexi" +
             " WHERE estacion_mexi.linea_padre = :pLinea " +
             " AND (" +
             " :pBusqueda IS NULL OR " +
