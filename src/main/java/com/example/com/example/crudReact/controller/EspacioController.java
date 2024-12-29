@@ -33,8 +33,8 @@ public class EspacioController {
     }
 
     @PostMapping("/agregarEspacio")
-    public Espacio crearEspacio(Espacio espacio){
-        return espacioService.crearEspacio(espacio);
+    public ResponseEntity<Espacio> crearEspacio(@RequestBody Espacio espacio){
+        return ResponseEntity.ok(espacioService.crearEspacio(espacio));
     }
 
     @PutMapping("/actualizarEspacio/{id}")

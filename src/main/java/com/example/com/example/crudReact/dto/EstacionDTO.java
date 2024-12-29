@@ -1,6 +1,5 @@
 package com.example.com.example.crudReact.dto;
 
-import com.example.com.example.crudReact.model.Espacio;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -26,11 +25,11 @@ public class EstacionDTO {
 
     @Getter
     @Setter
-    private List<Espacio> espacios;
+    private List<EspacioDTO> espacios;
 
     public EstacionDTO(){}
 
-    public EstacionDTO(Long idEstacion, String nombre, Long lineaPadre, List<Espacio> espacios){
+    public EstacionDTO(Long idEstacion, String nombre, Long lineaPadre, List<EspacioDTO> espacios){
         this.idEstacion = idEstacion;
         this.nombre = nombre;
         this.lineaPadre = lineaPadre;

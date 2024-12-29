@@ -20,8 +20,8 @@ public class EstacionController {
     EstacionServiceImpl estacionServiceImpl;
 
     @GetMapping("/buscaEstacion/{pBusqueda}")
-    public ResponseEntity<List<Estacion>> buscarEstacion(@PathVariable String pBusqueda){
-        List<Estacion> lstEstacion = estacionServiceImpl.buscarEstacion(Optional.ofNullable(StringUtils.isEmpty(pBusqueda.trim()) ? null:pBusqueda));
+    public ResponseEntity<List<EstacionDTO>> buscarEstacion(@PathVariable String pBusqueda){
+        List<EstacionDTO> lstEstacion = estacionServiceImpl.buscarEstacion(Optional.ofNullable(StringUtils.isEmpty(pBusqueda.trim()) ? null:pBusqueda));
         return ResponseEntity.ok(lstEstacion);
     }
 
@@ -33,8 +33,8 @@ public class EstacionController {
 
 
     @GetMapping("/obtenerEstacionById/{id}")
-    public Estacion obtenerEstacionById(Long id){
-        return estacionServiceImpl.obtenerEstacionById(id);
+    public ResponseEntity<Estacion> obtenerEstacionById(@PathVariable Long id){
+        return ResponseEntity.ok(estacionServiceImpl.obtenerEstacionById(id));
     }
 
     @PostMapping("/agregarEstacion")

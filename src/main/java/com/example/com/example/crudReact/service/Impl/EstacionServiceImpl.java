@@ -18,7 +18,7 @@ public class EstacionServiceImpl implements EstacionService {
     EstacionRepository estacionRepository;
 
     @Override
-    public List<Estacion> buscarEstacion(Optional<String> pBusqueda) {
+    public List<EstacionDTO> buscarEstacion(Optional<String> pBusqueda) {
         return pBusqueda.isPresent() ? estacionRepository.selectByExample
                 (String.format("%s%s%s", "%", pBusqueda.get(), "%")):
                 estacionRepository.selectByExample(null);

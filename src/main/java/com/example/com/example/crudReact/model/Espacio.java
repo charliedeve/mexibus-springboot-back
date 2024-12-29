@@ -1,6 +1,6 @@
 package com.example.com.example.crudReact.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,6 +33,5 @@ public class Espacio {
 
     @ManyToOne
     @JoinColumn(name = "estacion_padre", nullable = false)
-    @JsonIgnore
     private Estacion estacion;
 }
