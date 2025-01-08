@@ -3,6 +3,7 @@ package com.example.com.example.crudReact.controller;
 
 import com.example.com.example.crudReact.dto.EstacionDTO;
 import com.example.com.example.crudReact.model.Estacion;
+import com.example.com.example.crudReact.service.EstacionService;
 import com.example.com.example.crudReact.service.Impl.EstacionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +20,12 @@ public class EstacionController {
     @Autowired
     EstacionServiceImpl estacionServiceImpl;
 
+    @Autowired
+    EstacionService estacionService;
+
     @GetMapping("/buscaEstacion/{pBusqueda}")
-    public ResponseEntity<List<EstacionDTO>> buscarEstacion(@PathVariable String pBusqueda){
-        List<EstacionDTO> lstEstacion = estacionServiceImpl.buscarEstacion(Optional.ofNullable(StringUtils.isEmpty(pBusqueda.trim()) ? null:pBusqueda));
+    public ResponseEntity<List<Estacion>> buscarEstacion(@PathVariable String pBusqueda){
+        List<Estacion> lstEstacion = estacionServiceImpl.buscarEstacion(Optional.ofNullable(StringUtils.isEmpty(pBusqueda.trim()) ? null:pBusqueda));
         return ResponseEntity.ok(lstEstacion);
     }
 
@@ -38,8 +42,8 @@ public class EstacionController {
     }
 
     @PostMapping("/agregarEstacion")
-    public Estacion agregarEstacion(Estacion estacion){
-        return estacionServiceImpl.crearEstacion(estacion);
+    public ResponseEntity<Estacion> agregarEstacion(@RequestBody Estacion estacion){
+        return ResponseEntity.ok(estacionService.crearEstacion(estacion));
     }
 
     @DeleteMapping("/eliminarEstacion/{id}")

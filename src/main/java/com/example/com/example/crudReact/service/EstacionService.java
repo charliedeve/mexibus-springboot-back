@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface EstacionService {
 
-    List<EstacionDTO> buscarEstacion(Optional<String> pBusqueda);
+    List<Estacion> buscarEstacion(Optional<String> pBusqueda);
 
     List<Estacion> buscaEstacionByLinea(Long pLinea, Optional<String> pBusqueda);
 

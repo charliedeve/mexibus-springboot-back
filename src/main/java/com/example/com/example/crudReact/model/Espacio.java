@@ -33,5 +33,6 @@ public class Espacio {
 
     @ManyToOne
     @JoinColumn(name = "estacion_padre", nullable = false)
+    @JsonBackReference
     private Estacion estacion;
 }

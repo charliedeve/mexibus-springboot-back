@@ -1,5 +1,6 @@
 package com.example.com.example.crudReact.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -26,9 +27,10 @@ public class Estacion {
 
     @ManyToOne
     @JoinColumn(name = "linea_padre", nullable = false)
-    @JsonIgnore
+    @JsonBackReference
     private Linea lineaPadre;
 
     @OneToMany(mappedBy = "estacion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Espacio> espacios;
 }
