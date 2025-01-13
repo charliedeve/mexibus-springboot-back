@@ -17,28 +17,26 @@ import java.util.Optional;
 @RequestMapping("/estacion")
 public class EstacionController {
 
-    @Autowired
-    EstacionServiceImpl estacionServiceImpl;
 
     @Autowired
     EstacionService estacionService;
 
     @GetMapping("/buscaEstacion/{pBusqueda}")
     public ResponseEntity<List<Estacion>> buscarEstacion(@PathVariable String pBusqueda){
-        List<Estacion> lstEstacion = estacionServiceImpl.buscarEstacion(Optional.ofNullable(StringUtils.isEmpty(pBusqueda.trim()) ? null:pBusqueda));
+        List<Estacion> lstEstacion = estacionService.buscarEstacion(Optional.ofNullable(StringUtils.isEmpty(pBusqueda.trim()) ? null:pBusqueda));
         return ResponseEntity.ok(lstEstacion);
     }
 
     @GetMapping("/buscaEstacionByLinea/{pLinea}/{pBusqueda}")
     public ResponseEntity<List<Estacion>> buscaEstacionLinea(@PathVariable Long pLinea, @PathVariable String pBusqueda){
-        List<Estacion> lstEstacion = estacionServiceImpl.buscaEstacionByLinea(pLinea, Optional.ofNullable(StringUtils.isEmpty(pBusqueda.trim()) ? null:pBusqueda));
+        List<Estacion> lstEstacion = estacionService.buscaEstacionByLinea(pLinea, Optional.ofNullable(StringUtils.isEmpty(pBusqueda.trim()) ? null:pBusqueda));
         return ResponseEntity.ok(lstEstacion);
     }
 
 
     @GetMapping("/obtenerEstacionById/{id}")
     public ResponseEntity<Estacion> obtenerEstacionById(@PathVariable Long id){
-        return ResponseEntity.ok(estacionServiceImpl.obtenerEstacionById(id));
+        return ResponseEntity.ok(estacionService.obtenerEstacionById(id));
     }
 
     @PostMapping("/agregarEstacion")
@@ -48,6 +46,6 @@ public class EstacionController {
 
     @DeleteMapping("/eliminarEstacion/{id}")
     public void eliminarEstacion(@PathVariable Long id){
-        estacionServiceImpl.eliminarEstacion(id);
+        estacionService.eliminarEstacion(id);
     }
 }

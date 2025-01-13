@@ -8,11 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EspacioServiceImpl implements EspacioService {
-
 
 
     @Autowired
@@ -26,9 +24,6 @@ public class EspacioServiceImpl implements EspacioService {
 
 
     @Override
-    public List<Espacio> selectByExampleEstacion(Optional<String> pBusqueda) {
-        return List.of();
-    }
 
     public Espacio obtenerEspacioById(Long id){
         return espacioRepository.findById(id).orElse(null);
@@ -40,20 +35,13 @@ public class EspacioServiceImpl implements EspacioService {
     }
 
     @Override
-    public Espacio actualizarEspacio(Long id, Espacio espacio) {
-        espacioRepository.findById(id).map(indice -> {
-            indice.setDimensiones(espacio.getDimensiones());
-            indice.setPrecio(espacio.getPrecio());
-            indice.setEstado(espacio.getEstado());
-            indice.setEstacion(espacio.getEstacion());
-
-            return espacioRepository.save(indice);
-        });
-        return null;
+    public int updateEspacio(Long idEspacio, String nombre, String dimensiones, Double precio, String estado) {
+        return espacioRepository.updateEspacioById(idEspacio, nombre, dimensiones, precio, estado);
     }
 
+
     @Override
-    public void eliminarEspacio(Long id) {
-        espacioRepository.deleteById(id);
+    public void eliminarEspacio(Long idEspacio) {
+        espacioRepository.deleteById(idEspacio);
     }
 }
