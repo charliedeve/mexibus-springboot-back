@@ -43,51 +43,7 @@ public class Espacio {
         this.estacion = estacion;
     }
 
-    public Long getIdEspacio() {
-        return idEspacio;
-    }
-
-    public void setIdEspacio(Long idEspacio) {
-        this.idEspacio = idEspacio;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDimensiones() {
-        return dimensiones;
-    }
-
-    public void setDimensiones(String dimensiones) {
-        this.dimensiones = dimensiones;
-    }
-
-    public double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(int precio) {
-        this.precio = precio;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public Estacion getEstacion() {
-        return estacion;
-    }
-
-    public void setEstacion(Estacion estacion) {
-        this.estacion = estacion;
+    public String toString(){
+        return "idEspacio: " +idEspacio+ " Nombre: " +nombre+ " Dimensiones: " +dimensiones+ " Precio: " +precio+ " Estado: " +estado;
     }
 }
