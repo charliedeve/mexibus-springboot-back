@@ -12,7 +12,6 @@ import java.util.List;
 @Service
 public class EspacioServiceImpl implements EspacioService {
 
-
     @Autowired
     EspacioRepository espacioRepository;
 
@@ -22,10 +21,8 @@ public class EspacioServiceImpl implements EspacioService {
         return espacioRepository.findAll();
     }
 
-
     @Override
-
-    public Espacio obtenerEspacioById(Long id){
+    public Espacio obtenerEspacioById(Long id) {
         return espacioRepository.findById(id).orElse(null);
     }
 
@@ -38,7 +35,6 @@ public class EspacioServiceImpl implements EspacioService {
     public int updateEspacio(Long idEspacio, String nombre, String dimensiones, Double precio, String estado) {
         return espacioRepository.updateEspacioById(idEspacio, nombre, dimensiones, precio, estado);
     }
-
 
     @Override
     public void eliminarEspacio(Long idEspacio) {
