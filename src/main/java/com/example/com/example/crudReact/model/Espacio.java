@@ -2,12 +2,14 @@ package com.example.com.example.crudReact.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 
 
 @Entity
 @Data
 @Table(name = "espacio_public")
+@Builder
 public class Espacio {
 
     @Id
