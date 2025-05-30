@@ -1,0 +1,4 @@
+service\EspacioServiceTest.class
+controller\EspacioControllerTest.class
+com\example\com\example\crudReact\EspacioRepositoryTest.class
+com\example\com\example\crudReact\CrudSpringbootApplicationTests.class
