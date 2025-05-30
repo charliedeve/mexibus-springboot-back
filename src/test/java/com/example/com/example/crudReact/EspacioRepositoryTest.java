@@ -8,10 +8,13 @@ import com.example.com.example.crudReact.repository.EstacionRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.List;
 
@@ -19,6 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@EnableTransactionManagement
 public class EspacioRepositoryTest {
 
     @Autowired
@@ -31,64 +35,73 @@ public class EspacioRepositoryTest {
 
     private Estacion estacion;
 
-    private Espacio espacio2;
+    private Espacio espacio;
 
     @BeforeEach
-    void setup(){
-//        linea = new Linea(1L);
-//        estacion = new Estacion();
-//        estacion.setLineaPadre(linea);
-//        estacionRepository.save(estacion);
-//         espacio2 = Espacio.builder()
-//                 .nombre("Espacio 2")
-//                 .dimensiones("2x2")
-//                 .precio(2000)
-//                 .estado("Disponible")
-//                 .estacion(estacion)
-//                 .build();
+    void setup() {
+        linea = new Linea(1L);
+        estacion = new Estacion();
+        estacion.setLineaPadre(linea);
+        estacionRepository.save(estacion);
+         espacio = Espacio.builder()
+                 .nombre("Espacio 2")
+                 .dimensiones("2x2")
+                 .precio(2000)
+                 .estado("Disponible")
+                 .estacion(estacion)
+                 .build();
     }
 
     @DisplayName("Guardar espacio test")
     @Test
-    public void guardarEspacioTest(){
+    public void guardarEspacioTest() {
 
-        estacion.setLineaPadre(linea);
-        estacionRepository.save(estacion);
-        Espacio espacio1 = Espacio.builder()
-                .nombre("Espacio 1")
-                .dimensiones("1x1")
-                .precio(1000)
-                .estado("Disponible")
-                .estacion(estacion)
-                .build();
-        Espacio espacioGuardado = espacioRepository.save(espacio1);
+        Espacio espacioGuardado = espacioRepository.save(espacio);
 
-        System.out.println("NO null -> " +assertThat(espacioGuardado).isNotNull());
-        System.out.println("Mayor a cero -> " +assertThat(espacioGuardado.getIdEspacio()).isGreaterThan(0));
+        assertThat(espacioGuardado).isNotNull();
+        assertThat(espacioGuardado.getIdEspacio()).isGreaterThan(0);
     }
 
     @DisplayName("Test para listar espacios")
     @Test
-    public void listarEspaciosTest(){
+    public void listarEspaciosTest() {
         //given
-        linea = new Linea(1L);
-        estacion = new Estacion();
-        estacion.setLineaPadre(linea);
-//        Espacio espacio3 = Espacio.builder()
-//                .nombre("Espacio 3")
-//                .dimensiones("3x3")
-//                .precio(3000)
-//                .estado("Disponible")
-//                .estacion(estacion)
-//                .build();
-//        espacioRepository.save(espacio3);
-//        espacioRepository.save(espacio2);
 
         //when
-        List<Estacion> lstEspacios = estacionRepository.findAll();
+        List<Espacio> lstEspacios = espacioRepository.findAll();
 
         //then
         assertThat(lstEspacios.size()).isNotNull();
-        assertThat(lstEspacios.size()).isEqualTo(22);
+        assertThat(lstEspacios.size()).isEqualTo(17);
+    }
+
+    @DisplayName("Obtener espacio por ID")
+    @Test
+    public void obtenerEspacioByIdTest() {
+
+        espacioRepository.save(espacio);
+        Espacio espacioEncontrar = espacioRepository.findById(espacio.getIdEspacio()).get();
+
+        assertThat(espacioEncontrar).isNotNull();
+
+    }
+
+    @DisplayName("Actualizar un espacio")
+    @Test
+    public void actualizarEspacioTest() {
+
+        espacioRepository.save(espacio);
+
+        Espacio espacioGuardado = espacioRepository.findById(espacio.getIdEspacio()).get();
+        espacioGuardado.setNombre("Espacio testeado");
+        espacioGuardado.setDimensiones("Dimension testeada");
+        espacioGuardado.setPrecio(8888);
+        espacioGuardado.setEstado("Estado testeado");
+        Espacio espacioUpdated = espacioRepository.save(espacioGuardado);
+
+        assertThat(espacioUpdated).isNotNull();
+        assertThat(espacioUpdated.getNombre()).isEqualTo("Espacio testeado");
+        assertThat(espacioUpdated.getDimensiones()).isEqualTo("Dimension testeada");
+        
     }
 }
