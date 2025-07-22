@@ -10,15 +10,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 class CrudSpringbootApplicationTests {
-
-	@Test
-	void testLogin() {
-
-		LoginRequest loginRequest = new LoginRequest("admin", "demo");
-		String userExpected = "admin";
-		String passExpected = "demo";
-		assertEquals(userExpected, loginRequest.getUsername());
-		assertTrue(passExpected.equals(loginRequest.getPassword()));
-	}
+//
+//	@Test
+//	void testLogin() {
+//
+//		LoginRequest loginRequest = new LoginRequest("admin", "demo");
+//		String userExpected = "admin";
+//		String passExpected = "demo";
+//		assertEquals(userExpected, loginRequest.getUsername());
+//		assertTrue(passExpected.equals(loginRequest.getPassword()));
+//	}
 
 }

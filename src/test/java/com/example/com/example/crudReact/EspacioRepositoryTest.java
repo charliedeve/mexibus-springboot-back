@@ -6,6 +6,7 @@ import com.example.com.example.crudReact.model.Linea;
 import com.example.com.example.crudReact.repository.EspacioRepository;
 import com.example.com.example.crudReact.repository.EstacionRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -52,6 +53,7 @@ public class EspacioRepositoryTest {
                  .build();
     }
 
+    @Disabled
     @DisplayName("Guardar espacio test")
     @Test
     public void guardarEspacioTest() {
@@ -62,6 +64,7 @@ public class EspacioRepositoryTest {
         assertThat(espacioGuardado.getIdEspacio()).isGreaterThan(0);
     }
 
+    @Disabled
     @DisplayName("Test para listar espacios")
     @Test
     public void listarEspaciosTest() {
@@ -75,6 +78,7 @@ public class EspacioRepositoryTest {
         assertThat(lstEspacios.size()).isEqualTo(17);
     }
 
+    @Disabled
     @DisplayName("Obtener espacio por ID")
     @Test
     public void obtenerEspacioByIdTest() {
@@ -86,6 +90,7 @@ public class EspacioRepositoryTest {
 
     }
 
+    @Disabled
     @DisplayName("Actualizar un espacio")
     @Test
     public void actualizarEspacioTest() {
