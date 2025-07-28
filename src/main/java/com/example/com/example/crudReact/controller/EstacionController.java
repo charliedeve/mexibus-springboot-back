@@ -26,6 +26,11 @@ public class EstacionController {
         return "Hola desde Jenkins";
     }
 
+    @GetMapping("/saludo2")
+    public String saludo2(){
+        return "Hola desde Jenkins";
+    }
+
     @GetMapping("/buscaEstacion/{pBusqueda}")
     public ResponseEntity<List<Estacion>> buscarEstacion(@PathVariable String pBusqueda){
         List<Estacion> lstEstacion = estacionService.buscarEstacion(Optional.ofNullable(StringUtils.isEmpty(pBusqueda.trim()) ? null:pBusqueda));
