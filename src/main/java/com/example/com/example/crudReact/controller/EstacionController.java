@@ -21,6 +21,11 @@ public class EstacionController {
     @Autowired
     EstacionService estacionService;
 
+    @GetMapping("/saludo")
+    public String saludo(){
+        return "Hola desde Jenkins";
+    }
+
     @GetMapping("/buscaEstacion/{pBusqueda}")
     public ResponseEntity<List<Estacion>> buscarEstacion(@PathVariable String pBusqueda){
         List<Estacion> lstEstacion = estacionService.buscarEstacion(Optional.ofNullable(StringUtils.isEmpty(pBusqueda.trim()) ? null:pBusqueda));
