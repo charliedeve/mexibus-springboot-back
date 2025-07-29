@@ -29,6 +29,7 @@ public class EstacionController {
     @GetMapping("/saludo2")
     public String saludo2(){
         return "Hola desde Jenkins"; // Este es un cambio de prueba para ver si Jenkins lo detecta
+        // Este es un cambio de prueba para ver si Jenkins lo detecta
     }
 
     @GetMapping("/buscaEstacion/{pBusqueda}")
