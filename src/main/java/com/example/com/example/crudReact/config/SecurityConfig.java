@@ -24,9 +24,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain  securityFilterChain (HttpSecurity http) throws Exception{
         return http
-                .csrf(csrf -> csrf.disable())
+                .csrf(csrf -> csrf
+                        .ignoringRequestMatchers("/webhook")
+                        .disable())
                 .authorizeHttpRequests(authRequest ->
-                authRequest.requestMatchers("/auth/**", "/swagger-ui/**").permitAll()
+                authRequest.requestMatchers("/auth/**", "/swagger-ui/**", "/webhook").permitAll()
                         .anyRequest().authenticated()
         ).sessionManagement(sessionManager -> sessionManager
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
