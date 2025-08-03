@@ -25,10 +25,9 @@ public class SecurityConfig {
     public SecurityFilterChain  securityFilterChain (HttpSecurity http) throws Exception{
         return http
                 .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/webhook/**")
                         .disable())
                 .authorizeHttpRequests(authRequest ->
-                authRequest.requestMatchers("/auth/**", "/swagger-ui/**", "/webhook/**").permitAll()
+                authRequest.requestMatchers("/auth/**", "/swagger-ui/**").permitAll()
                         .anyRequest().authenticated()
         ).sessionManagement(sessionManager -> sessionManager
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
