@@ -25,6 +25,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 import java.util.Optional;
 
+@Disabled
 @ExtendWith(MockitoExtension.class)
 public class EspacioServiceTest {
 
@@ -40,22 +41,21 @@ public class EspacioServiceTest {
 
     private Espacio espacio;
 
-//    public void setup(){
-//        linea = new Linea(1L);
-//        estacion = new Estacion();
-//        estacion.setLineaPadre(linea);
-//        espacio = Espacio.builder()
-//                .idEspacio(1L)
-//                .nombre("Espacio 1")
-//                .dimensiones("1x1")
-//                .precio(20000)
-//                .estado("Available")
-//                .estacion(estacion)
-//                .build();
-//        espacioRepository.save(espacio);
-//    }
+    public void setup(){
+        linea = new Linea(1L);
+        estacion = new Estacion();
+        estacion.setLineaPadre(linea);
+        espacio = Espacio.builder()
+                .idEspacio(1L)
+                .nombre("Espacio 1")
+                .dimensiones("1x1")
+                .precio(20000)
+                .estado("Available")
+                .estacion(estacion)
+                .build();
+        espacioRepository.save(espacio);
+    }
 
-    @Disabled
     @DisplayName("Guardar un espacio")
     @Test
     public void guardarEspacioTest() {

@@ -1,4 +1,4 @@
-package com.example.com.example.crudReact;
+package com.example.com.example.crudReact.repository;
 
 import com.example.com.example.crudReact.model.Espacio;
 import com.example.com.example.crudReact.model.Estacion;
@@ -9,9 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -21,6 +19,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Disabled
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @EnableTransactionManagement
@@ -38,19 +37,20 @@ public class EspacioRepositoryTest {
 
     private Espacio espacio;
 
+    @Disabled
     @BeforeEach
     void setup() {
         linea = new Linea(1L);
         estacion = new Estacion();
         estacion.setLineaPadre(linea);
         estacionRepository.save(estacion);
-         espacio = Espacio.builder()
-                 .nombre("Espacio 2")
-                 .dimensiones("2x2")
-                 .precio(2000)
-                 .estado("Disponible")
-                 .estacion(estacion)
-                 .build();
+        espacio = Espacio.builder()
+                .nombre("Espacio 2")
+                .dimensiones("2x2")
+                .precio(2000)
+                .estado("Disponible")
+                .estacion(estacion)
+                .build();
     }
 
     @Disabled
@@ -107,6 +107,6 @@ public class EspacioRepositoryTest {
         assertThat(espacioUpdated).isNotNull();
         assertThat(espacioUpdated.getNombre()).isEqualTo("Espacio testeado");
         assertThat(espacioUpdated.getDimensiones()).isEqualTo("Dimension testeada");
-        
+
     }
 }

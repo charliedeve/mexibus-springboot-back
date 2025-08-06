@@ -17,7 +17,7 @@ public class EspacioController {
 
 
     @Autowired
-    EspacioService espacioService;
+    public EspacioService espacioService;
 
     @GetMapping("/buscaEspacio")
     public ResponseEntity<List<Espacio>> buscaEspacio() {
