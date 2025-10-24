@@ -6,7 +6,6 @@ import lombok.*;
 
 import java.util.List;
 
-@Data
 public class EstacionDTO implements java.io.Serializable{
 
     private Long idEstacion;

@@ -4,7 +4,6 @@ package com.example.com.example.crudReact.service.Impl;
 import com.example.com.example.crudReact.model.Espacio;
 import com.example.com.example.crudReact.repository.EspacioRepository;
 import com.example.com.example.crudReact.service.EspacioService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,9 +11,11 @@ import java.util.List;
 @Service
 public class EspacioServiceImpl implements EspacioService {
 
-    @Autowired
-    EspacioRepository espacioRepository;
+    private final EspacioRepository espacioRepository;
 
+    public EspacioServiceImpl(EspacioRepository espacioRepository) {
+        this.espacioRepository = espacioRepository;
+    }
 
     @Override
     public List<Espacio> buscarEspacios() {
@@ -32,8 +33,14 @@ public class EspacioServiceImpl implements EspacioService {
     }
 
     @Override
-    public int updateEspacio(Long idEspacio, String nombre, String dimensiones, Double precio, String estado) {
-        return espacioRepository.updateEspacioById(idEspacio, nombre, dimensiones, precio, estado);
+    public Espacio updateEspacio(Long idEspacio, Espacio espacio) {
+        Espacio espacioExistente = espacioRepository.findById(idEspacio).orElse(null);
+        espacioExistente.setNombre(espacio.getNombre());
+        espacioExistente.setDimensiones(espacio.getDimensiones());
+        espacioExistente.setPrecio(espacio.getPrecio());
+        espacioExistente.setEstado(espacio.getEstado());
+
+        return espacioRepository.save(espacioExistente);
     }
 
     @Override

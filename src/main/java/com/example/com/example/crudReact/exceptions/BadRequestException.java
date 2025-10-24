@@ -1,0 +1,7 @@
+package com.example.com.example.crudReact.exceptions;
+
+public class BadRequestException extends RuntimeException {
+    public BadRequestException(String message) {
+        super(message);
+    }
+}
