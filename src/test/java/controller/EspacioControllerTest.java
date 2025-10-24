@@ -45,11 +45,6 @@ public class EspacioControllerTest {
 
     @BeforeEach
     void setUp() {
-        espacioService = mock(EspacioService.class); // creas el mock
-        espacioController = new EspacioController(); // instancia real del controlador
-
-        // inyectas manualmente el mock (ya que usas @Autowired en tu controlador)
-        espacioController.espacioService = espacioService;
     }
 
     @Test

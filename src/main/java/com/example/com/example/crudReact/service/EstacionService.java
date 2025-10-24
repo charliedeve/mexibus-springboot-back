@@ -8,13 +8,13 @@ import java.util.Optional;
 
 public interface EstacionService {
 
-    List<Estacion> buscarEstacion(Optional<String> pBusqueda);
+    List<EstacionDTO> buscarEstacion(Optional<String> pBusqueda);
 
-    List<Estacion> buscaEstacionByLinea(Long pLinea, Optional<String> pBusqueda);
+    List<EstacionDTO> buscaEstacionByLinea(Long pLinea, Optional<String> pBusqueda);
 
-    Estacion obtenerEstacionById(Long id);
+    EstacionDTO obtenerEstacionById(Long id);
 
-    Estacion crearEstacion(Estacion estacion);
+    EstacionDTO crearEstacion(Estacion estacion);
 
     void eliminarEstacion(Long id);
 }

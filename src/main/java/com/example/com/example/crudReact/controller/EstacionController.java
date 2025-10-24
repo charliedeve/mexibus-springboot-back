@@ -4,68 +4,66 @@ package com.example.com.example.crudReact.controller;
 import com.example.com.example.crudReact.dto.EstacionDTO;
 import com.example.com.example.crudReact.model.Estacion;
 import com.example.com.example.crudReact.service.EstacionService;
-import com.example.com.example.crudReact.service.Impl.EstacionServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/estacion")
+@RequestMapping("/api/v1/estacion")
 public class EstacionController {
 
+    private final EstacionService estacionService;
 
-    @Autowired
-    EstacionService estacionService;
-
-    @GetMapping("/saludo")
-    public String saludo(){
-        return "Hola desde Jenkins";
+    public EstacionController(EstacionService estacionService){
+        this.estacionService = estacionService;
     }
 
-    @GetMapping("/saludo2")
-    public String saludo2(){
-        return "Hola desde Jenkins"; // Este es un cambio de prueba para ver si Jenkins lo detecta
-        // Este es un cambio de prueba para ver si Jenkins lo detecta
-        // Este es un cambio de prueba para ver si Jenkins lo detecta
-    }
-
-    @GetMapping("/buscaEstacion/{pBusqueda}")
-    public ResponseEntity<List<Estacion>> buscarEstacion(@PathVariable String pBusqueda){
-        List<Estacion> lstEstacion = estacionService.buscarEstacion(Optional.ofNullable(StringUtils.isEmpty(pBusqueda.trim()) ? null:pBusqueda));
+    @Operation(summary = "Buscar estaciones por nombre")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Estaciones encontradas"),
+            @ApiResponse(responseCode = "404", description = "No se encontraron estaciones")
+    })
+    @GetMapping("/{pBusqueda}")
+    public ResponseEntity<List<EstacionDTO>> buscarEstacion(@PathVariable String pBusqueda){
+        List<EstacionDTO> lstEstacion = estacionService.buscarEstacion(Optional.ofNullable(pBusqueda.trim().isEmpty() ? null:pBusqueda));
         return ResponseEntity.ok(lstEstacion);
-        // Cambio de prueba jenkins
-        // // Cambio de prueba jenkins 2
-        // // Cambio de prueba jenkins 3
-        // // Cambio de prueba jenkins 4
-        // Cambio de prueba jenkins 5
-        // Cambio de prueba jenkins webhook_pipelines
     }
 
-    @GetMapping("/buscaEstacionByLinea/{pLinea}/{pBusqueda}")
-    public ResponseEntity<List<Estacion>> buscaEstacionLinea(@PathVariable Long pLinea, @PathVariable String pBusqueda){
-        List<Estacion> lstEstacion = estacionService.buscaEstacionByLinea(pLinea, Optional.ofNullable(StringUtils.isEmpty(pBusqueda.trim()) ? null:pBusqueda));
+    @Operation(summary = "Buscar estaciones por linea y nombre")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Estaciones encontradas"),
+            @ApiResponse(responseCode = "404", description = "No se encontraron estaciones")
+    })
+    @GetMapping("/{pLinea}/{pBusqueda}")
+    public ResponseEntity<List<EstacionDTO>> buscaEstacionLinea(@PathVariable Long pLinea, @PathVariable String pBusqueda){
+        List<EstacionDTO> lstEstacion = estacionService.buscaEstacionByLinea(pLinea, Optional.ofNullable(pBusqueda.trim().isEmpty() ? null:pBusqueda));
         return ResponseEntity.ok(lstEstacion);
-        // Cambio para ver si Jenkins lo detecta
-        // Cambio para ver si Jenkins lo detecta 2
     }
 
-
-    @GetMapping("/obtenerEstacionById/{id}")
-    public ResponseEntity<Estacion> obtenerEstacionById(@PathVariable Long id){
-        return ResponseEntity.ok(estacionService.obtenerEstacionById(id));
-    }
-
-    @PostMapping("/agregarEstacion")
+    @Operation(summary = "Agregar una nueva estación")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Estación creada"),
+            @ApiResponse(responseCode = "400", description = "Solicitud inválida")
+    })
+    @PostMapping
     public ResponseEntity<Estacion> agregarEstacion(@RequestBody Estacion estacion){
-        return ResponseEntity.ok(estacionService.crearEstacion(estacion));
+        return ResponseEntity.status(HttpStatus.CREATED).body(estacion);
     }
 
-    @DeleteMapping("/eliminarEstacion/{id}")
-    public void eliminarEstacion(@PathVariable Long id){
-        estacionService.eliminarEstacion(id);
+    @Operation(summary = "Eliminar una estación existente")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Estación eliminada"),
+            @ApiResponse(responseCode = "404", description = "No se encontró la estación"),
+            @ApiResponse(responseCode = "400", description = "Solicitud inválida")
+    })
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarEstacion(@PathVariable Long id){
+        return ResponseEntity.noContent().build();
     }
 }

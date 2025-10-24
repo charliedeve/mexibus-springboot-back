@@ -15,17 +15,19 @@ import java.util.Map;
 @RequestMapping("/espacio")
 public class EspacioController {
 
+    private final EspacioService espacioService;
 
-    @Autowired
-    public EspacioService espacioService;
+    public EspacioController(EspacioService espacioService) {
+        this.espacioService = espacioService;
+    }
 
-    @GetMapping("/buscaEspacio")
+    @GetMapping
     public ResponseEntity<List<Espacio>> buscaEspacio() {
         List<Espacio> espacios = espacioService.buscarEspacios();
         return ResponseEntity.ok(espacios);
     }
 
-    @GetMapping("/obtenerEspacioById/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Espacio> obtenerEspacioById(@PathVariable Long id){
         Espacio espacio = espacioService.obtenerEspacioById(id);
         if (espacio != null) {
@@ -35,29 +37,22 @@ public class EspacioController {
         }
     }
 
-    @PostMapping("/agregarEspacio")
+    @PostMapping
     public ResponseEntity<Espacio> crearEspacio(@RequestBody Espacio espacio){
         return ResponseEntity.ok(espacioService.crearEspacio(espacio));
     }
 
     @PutMapping("/actualizarEspacio/{pIdEspacio}")
-    public ResponseEntity<String> actualizarEspacio(@PathVariable("pIdEspacio") Long idEspacio,
-                                                    @RequestBody Map<String, Object> requestBody){
-
-        int affectedRows = espacioService.updateEspacio(idEspacio, requestBody.get("nombre").toString(),
-                requestBody.get("dimensiones").toString(), ((Number) requestBody.get("precio")).doubleValue(),
-                requestBody.get("estado").toString());
-
-        if(affectedRows > 0) {
-            return ResponseEntity.ok("Espacio actualizado correctamente");
-        }else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el espacio");
-
+    public ResponseEntity<Espacio> actualizarEspacio(@PathVariable Long idEspacio, @RequestBody Espacio espacio){
+        Espacio espacioActualizado = espacioService.updateEspacio(idEspacio, espacio);
+        if (espacioActualizado != null) {
+            return ResponseEntity.ok(espacioActualizado);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-
     }
 
-    @DeleteMapping("/eliminarEspacio/{idEspacio}")
+    @DeleteMapping("/{idEspacio}")
     public void eliminarEspacio(@PathVariable Long idEspacio){
         espacioService.eliminarEspacio(idEspacio);
     }

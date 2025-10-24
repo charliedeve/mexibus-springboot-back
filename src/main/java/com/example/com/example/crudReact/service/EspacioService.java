@@ -12,7 +12,7 @@ public interface EspacioService {
 
     Espacio crearEspacio(Espacio espacio);
 
-    int updateEspacio(Long idEspacio, String nombre, String dimensiones, Double precio, String estado);
+    Espacio updateEspacio(Long idEspacio, Espacio espacio);
 
     void eliminarEspacio(Long idEspacio);
 }
