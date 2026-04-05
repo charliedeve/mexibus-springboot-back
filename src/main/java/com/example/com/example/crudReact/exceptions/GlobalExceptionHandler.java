@@ -16,7 +16,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleBadResourceNotFoundException(ResourceNotFoundException exception){
         ErrorResponse errorResponse = new ErrorResponse(
                 exception.getMessage(),
-                HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.NOT_FOUND.value(),
                 "Solicitud incorrecta"
         );
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);

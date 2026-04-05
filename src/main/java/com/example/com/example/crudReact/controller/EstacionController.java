@@ -3,6 +3,7 @@ package com.example.com.example.crudReact.controller;
 
 import com.example.com.example.crudReact.dto.EstacionDTO;
 import com.example.com.example.crudReact.model.Estacion;
+import com.example.com.example.crudReact.model.Linea;
 import com.example.com.example.crudReact.service.EstacionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -30,8 +31,8 @@ public class EstacionController {
             @ApiResponse(responseCode = "404", description = "No se encontraron estaciones")
     })
     @GetMapping("/{pBusqueda}")
-    public ResponseEntity<List<EstacionDTO>> buscarEstacion(@PathVariable String pBusqueda){
-        List<EstacionDTO> lstEstacion = estacionService.buscarEstacion(Optional.ofNullable(pBusqueda.trim().isEmpty() ? null:pBusqueda));
+    public ResponseEntity<List<EstacionDTO>> buscarEstacion(@PathVariable(required = false) String pBusqueda){
+        List<EstacionDTO> lstEstacion = estacionService.buscarEstacion(pBusqueda);
         return ResponseEntity.ok(lstEstacion);
     }
 
@@ -41,8 +42,8 @@ public class EstacionController {
             @ApiResponse(responseCode = "404", description = "No se encontraron estaciones")
     })
     @GetMapping("/{pLinea}/{pBusqueda}")
-    public ResponseEntity<List<EstacionDTO>> buscaEstacionLinea(@PathVariable Long pLinea, @PathVariable String pBusqueda){
-        List<EstacionDTO> lstEstacion = estacionService.buscaEstacionByLinea(pLinea, Optional.ofNullable(pBusqueda.trim().isEmpty() ? null:pBusqueda));
+    public ResponseEntity<List<EstacionDTO>> buscaEstacionLinea(@PathVariable Long pLinea, @PathVariable(required = false) String pBusqueda){
+        List<EstacionDTO> lstEstacion = estacionService.buscaEstacionByLinea(pLinea, pBusqueda);
         return ResponseEntity.ok(lstEstacion);
     }
 

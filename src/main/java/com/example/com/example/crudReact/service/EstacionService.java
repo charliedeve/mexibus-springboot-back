@@ -8,9 +8,9 @@ import java.util.Optional;
 
 public interface EstacionService {
 
-    List<EstacionDTO> buscarEstacion(Optional<String> pBusqueda);
+    List<EstacionDTO> buscarEstacion(String pBusqueda);
 
-    List<EstacionDTO> buscaEstacionByLinea(Long pLinea, Optional<String> pBusqueda);
+    List<EstacionDTO> buscaEstacionByLinea(Long pLinea, String pBusqueda);
 
     EstacionDTO obtenerEstacionById(Long id);
 

@@ -2,6 +2,7 @@ package com.example.com.example.crudReact.service.Impl;
 
 
 import com.example.com.example.crudReact.dto.EstacionDTO;
+import com.example.com.example.crudReact.exceptions.ResourceNotFoundException;
 import com.example.com.example.crudReact.mapper.EstacionMapper;
 import com.example.com.example.crudReact.model.Estacion;
 import com.example.com.example.crudReact.repository.EstacionRepository;
@@ -23,19 +24,20 @@ public class EstacionServiceImpl implements EstacionService {
     }
 
     @Override
-    public List<EstacionDTO> buscarEstacion(Optional<String> pBusqueda) {
-        List<Estacion> estaciones = pBusqueda.isPresent() ?
-                estacionRepository.selectByExample(String.format("%s%s%s", "%", pBusqueda.get(), "%")):
-                estacionRepository.selectByExample(null);
+    public List<EstacionDTO> buscarEstacion(String pBusqueda) {
+        List<Estacion> estaciones = estacionRepository.selectByExample(pBusqueda);
 
         return estaciones.stream().map(estacionMapper::toDTO).toList();
     }
 
     @Override
-    public List<EstacionDTO> buscaEstacionByLinea(Long pLinea, Optional<String> pBusqueda) {
-        List<Estacion> estaciones = pBusqueda.isPresent() ? estacionRepository.selectByLineaPadre
-                (pLinea, String.format("%s%s%s", "%", pBusqueda.get(), "%")):
-                estacionRepository.selectByLineaPadre(pLinea, null);
+    public List<EstacionDTO> buscaEstacionByLinea(Long pLinea, String pBusqueda) {
+
+        if (pLinea > 4 || pLinea < 1) {
+            throw new ResourceNotFoundException("No existe la linea " + pLinea);
+        }
+
+        List<Estacion> estaciones = estacionRepository.selectByLineaPadre(pLinea, null);
 
         return estaciones.stream().map(estacionMapper::toDTO).toList();
     }
